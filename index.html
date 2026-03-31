@@ -210,7 +210,8 @@
             const now = new Date();
             const diffMs = now - startDate;
             if (diffMs < 0) {
-                counterDiv.innerHTML = `💖 في انتظار 2 يونيو 2025 💖`;
+                counterDiv.innerHTML = `💖 في انتظار 2 يونيو 2025 💖
+                `;
                 return;
             }
             const totalSeconds = Math.floor(diffMs / 1000);
@@ -218,7 +219,7 @@
             const hours = Math.floor((totalSeconds % 86400) / 3600);
             const minutes = Math.floor((totalSeconds % 3600) / 60);
             const seconds = totalSeconds % 60;
-            counterDiv.innerHTML = `💖 ${days}  / ${hours}  / ${minutes}  / ${seconds}  💖`;
+            counterDiv.innerHTML = `💖 306 يوم/ 7344 ساعه/ 440640 دقيقه/ 26438400 ثانيه 💖`;
         }
         updateCounter();
         setInterval(updateCounter, 1000);
