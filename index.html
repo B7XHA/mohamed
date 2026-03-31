@@ -218,7 +218,7 @@
             const hours = Math.floor((totalSeconds % 86400) / 3600);
             const minutes = Math.floor((totalSeconds % 3600) / 60);
             const seconds = totalSeconds % 60;
-            counterDiv.innerHTML = `💖 ${days} يوم | ${hours} ساعة | ${minutes} دقيقة | ${seconds} ثانية 💖`;
+            counterDiv.innerHTML = `💖 ${days}  | ${hours}  | ${minutes}  | ${seconds}  💖`;
         }
         updateCounter();
         setInterval(updateCounter, 1000);
