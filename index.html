@@ -1,4 +1,4 @@
-Enter<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
@@ -140,14 +140,13 @@ Enter<!DOCTYPE html>
     justify-content: center;
   }
 
-  video {
+  .video-iframe {
     width: 90%;
     max-width: 330px;
     aspect-ratio: 9 / 16;
-    object-fit: cover;
     border-radius: 38px;
     box-shadow: 0 18px 30px rgba(0,0,0,0.6), 0 0 0 3px #ff77aa;
-    background: #1a001f;
+    border: none;
   }
 
   .falling-heart {
@@ -179,9 +178,15 @@ Enter<!DOCTYPE html>
   <button id="startBtn">✨ اضغط هنا ✨</button>
 </div>
 
-<!-- ملفات الصوت بامتداد mp3v -->
-<audio id="bgMusic" src="vice1.mp3v" loop preload="auto"></audio>
-<audio id="voiceMsg" src="vice2.mp3v" preload="auto"></audio>
+<!-- صوت خلفية من Vocaroo -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://voca.ro/11k2ojVcKXcz/embed" type="audio/mpeg">
+</audio>
+
+<!-- رسالة صوتية (ريكورد) من Vocaroo -->
+<audio id="voiceMsg" preload="auto">
+  <source src="https://voca.ro/1cB0cZIuo82o/embed" type="audio/mpeg">
+</audio>
 
 <div class="glass-container">
   <img src="image.jpg" class="main-img" alt="حب" onerror="this.src='https://placehold.co/400x400/ff3388/white?text=💖'">
@@ -198,11 +203,15 @@ Enter<!DOCTYPE html>
     <div style="font-size: 14px;">♥ رسالة صوتية ♥</div>
   </div>
 
+  <!-- فيديو من YouTube -->
   <div class="video-wrapper">
-    <video controls playsinline preload="metadata">
-      <source src="video1.mp4v" type="video/mp4">
-      الفيديو مش مدعوم من المتصفح
-    </video>
+    <iframe class="video-iframe" 
+      src="https://www.youtube.com/embed/JBg7UkXFmcU" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen>
+    </iframe>
   </div>
   <div class="footer-note">🌹 كل لحظة معاكِ أغلى من أي حاجة 🌹</div>
 </div>
@@ -287,7 +296,11 @@ Enter<!DOCTYPE html>
             bg.volume = 0.2;
         }
         voiceAudio.currentTime = 0;
-        voiceAudio.play().catch(err => console.log("الصوت:", err));
+        voiceAudio.play().catch(err => {
+            console.log("الصوت:", err);
+            // لو فشل التشغيل، نرجع الصوت الخلفي طبيعي
+            if (wasPlaying) bg.volume = 1.0;
+        });
         voiceAudio.onended = () => {
             if (wasPlaying) bg.volume = 1.0;
             voiceAudio.onended = null;
@@ -330,4 +343,4 @@ Enter<!DOCTYPE html>
 })();
 </script>
 </body>
-       </html>
+</html>
