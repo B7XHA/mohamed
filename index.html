@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Enter<!DOCTYPE html>
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
@@ -6,11 +6,7 @@
 <title>💖 صفحة حبيبتي 💖</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     min-height: 100vh;
@@ -174,20 +170,6 @@
     margin-top: 20px;
     opacity: 0.7;
   }
-
-  /* رسالة خطأ لو الملفات مش موجودة */
-  .error-toast {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: #ff3366cc;
-    backdrop-filter: blur(10px);
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 12px;
-    z-index: 3000;
-    display: none;
-  }
 </style>
 </head>
 <body>
@@ -197,8 +179,9 @@
   <button id="startBtn">✨ اضغط هنا ✨</button>
 </div>
 
-<audio id="bgMusic" src="vice1.mp3" loop preload="auto"></audio>
-<audio id="voiceMsg" src="vice2.mp3" preload="auto"></audio>
+<!-- ملفات الصوت بامتداد mp3v -->
+<audio id="bgMusic" src="vice1.mp3v" loop preload="auto"></audio>
+<audio id="voiceMsg" src="vice2.mp3v" preload="auto"></audio>
 
 <div class="glass-container">
   <img src="image.jpg" class="main-img" alt="حب" onerror="this.src='https://placehold.co/400x400/ff3388/white?text=💖'">
@@ -216,16 +199,13 @@
   </div>
 
   <div class="video-wrapper">
-    <video id="loveVideo" controls playsinline preload="metadata">
-      <source src="video1.mp4" type="video/mp4">
+    <video controls playsinline preload="metadata">
       <source src="video1.mp4v" type="video/mp4">
       الفيديو مش مدعوم من المتصفح
     </video>
   </div>
   <div class="footer-note">🌹 كل لحظة معاكِ أغلى من أي حاجة 🌹</div>
 </div>
-
-<div id="errorToast" class="error-toast">⚠️</div>
 
 <script>
 (function() {
@@ -236,32 +216,10 @@
     const voicePlayBtn = document.getElementById('voicePlayBtn');
     const typedDiv = document.getElementById('typedText');
     const counterDiv = document.getElementById('loveCounter');
-    const video = document.getElementById('loveVideo');
-    const errorToast = document.getElementById('errorToast');
 
     const loveMessage = `💗 كل لحظة معاكِ أغلى من أي حاجة ❤️\nأنتِ مصدر سعادتي ودنياي 💖`;
     let charIndex = 0;
     let typingInterval = null;
-
-    function showError(msg) {
-        errorToast.textContent = msg;
-        errorToast.style.display = 'block';
-        setTimeout(() => { errorToast.style.display = 'none'; }, 4000);
-    }
-
-    // التحقق من وجود ملفات وسائط
-    function checkMediaFiles() {
-        // اختبار الصوت الخلفي
-        fetch('vice1.mp3', { method: 'HEAD' }).catch(() => {
-            showError('⚠️ ملف الموسيقى غير موجود: vice1.mp3');
-        });
-        fetch('vice2.mp3', { method: 'HEAD' }).catch(() => {
-            showError('⚠️ ملف الرسالة الصوتية غير موجود: vice2.mp3');
-        });
-        fetch('video1.mp4', { method: 'HEAD' }).catch(() => {
-            showError('⚠️ ملف الفيديو غير موجود: video1.mp4');
-        });
-    }
 
     function startTypingEffect() {
         typedDiv.innerHTML = '';
@@ -329,11 +287,7 @@
             bg.volume = 0.2;
         }
         voiceAudio.currentTime = 0;
-        voiceAudio.play().catch(err => {
-            console.warn("الصوت:", err);
-            showError('⚠️ فشل تشغيل الصوت - تأكد من ملف vice2.mp3');
-            if (wasPlaying) bg.volume = 1.0;
-        });
+        voiceAudio.play().catch(err => console.log("الصوت:", err));
         voiceAudio.onended = () => {
             if (wasPlaying) bg.volume = 1.0;
             voiceAudio.onended = null;
@@ -344,13 +298,6 @@
         e.stopPropagation();
         playVoiceRecording();
     });
-
-    // محاولة إعادة تحميل الفيديو لو فشل
-    if (video) {
-        video.addEventListener('error', () => {
-            showError('⚠️ فشل تحميل الفيديو - حاول مره أخرى أو تأكد من ملف video1.mp4');
-        });
-    }
 
     let isStarted = false;
     function startFullExperience() {
@@ -363,15 +310,11 @@
         }, 400);
 
         bgMusic.volume = 0.8;
-        bgMusic.play().catch(e => {
-            console.log("موسيقى:", e);
-            showError('⚠️ فشل تشغيل الموسيقى - تأكد من ملف vice1.mp3');
-        });
+        bgMusic.play().catch(e => console.log("موسيقى:", e));
 
         startTypingEffect();
         initCounterAndUpdate();
         startFallingHearts();
-        checkMediaFiles(); // فحص الملفات واعلام المستخدم
     }
 
     startBtn.addEventListener('click', (e) => {
@@ -379,7 +322,6 @@
         startFullExperience();
     });
 
-    // ضمان استمرار القلوب
     setInterval(() => {
         if (isStarted && !heartsInterval) {
             startFallingHearts();
@@ -388,4 +330,4 @@
 })();
 </script>
 </body>
-</html>
+       </html>
