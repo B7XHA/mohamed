@@ -2,231 +2,383 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- خط عربي -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>💖 صفحة حبيبتي 💖</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-
-<title>💖</title>
-
 <style>
-body {
+  * {
     margin: 0;
-    font-family: 'Cairo', sans-serif;
-    color: white;
-    text-align: center;
-    background: linear-gradient(135deg, #1a001f, #330033, #660033);
-    overflow-x: hidden;
-}
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-/* البداية */
-#startScreen {
+  body {
+    min-height: 100vh;
+    background: radial-gradient(circle at 10% 30%, #2a001a, #0d0012);
+    font-family: 'Cairo', sans-serif;
+    color: #fff6f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* شاشة البداية (بدون كلمة LOVE) */
+  #startScreen {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, #ff0066, #1a001f);
+    background: radial-gradient(circle at center, #ff3b6f, #4a0020);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
-}
+    z-index: 1000;
+    flex-direction: column;
+    gap: 30px;
+  }
 
-#startBtn {
-    padding: 20px 50px;
-    font-size: 22px;
-    background: linear-gradient(45deg, #ff4d94, #ff99cc);
-    border-radius: 30px;
+  /* صورة في شاشة البداية */
+  #startImg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #ff99cc;
+    box-shadow: 0 0 40px #ff4d94;
+  }
+
+  #startBtn {
+    padding: 18px 48px;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #ffb347, #ff6b6b);
     border: none;
+    border-radius: 60px;
     color: white;
-}
+    cursor: pointer;
+    box-shadow: 0 0 30px #ff4080;
+    transition: transform 0.2s;
+  }
 
-/* القلوب */
-.heart {
+  #startBtn:hover {
+    transform: scale(1.02);
+  }
+
+  /* الحاوية الرئيسية */
+  .glass-container {
+    max-width: 550px;
+    width: 100%;
+    background: rgba(25, 5, 30, 0.55);
+    backdrop-filter: blur(14px);
+    border-radius: 65px;
+    padding: 25px 20px 35px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    border: 1px solid rgba(255, 100, 150, 0.5);
+  }
+
+  /* الصورة الرئيسية */
+  .main-img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 58px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.4), 0 0 0 3px #ff99cc;
+    margin-bottom: 12px;
+  }
+
+  .message-area {
+    background: rgba(0,0,0,0.3);
+    border-radius: 48px;
+    padding: 18px 15px;
+    margin: 15px 0 12px;
+    border-right: 4px solid #ff6699;
+    border-left: 4px solid #ff6699;
+  }
+
+  #typedText {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #fff3e6;
+    text-shadow: 0 2px 5px #ff3388;
+    min-height: 90px;
+  }
+
+  .counter-love {
+    background: linear-gradient(120deg, #ff3b6f30, #b8004b30);
+    border-radius: 50px;
+    padding: 12px 8px;
+    margin: 12px 0 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .voice-card {
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 100px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 15px 0 20px;
+    border: 1px solid #ff99cc;
+  }
+
+  .play-circle {
+    width: 55px;
+    height: 55px;
+    background: radial-gradient(circle, #ff6a88, #ff2e63);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0 0 12px #ff4d6d;
+  }
+
+  .play-circle:active {
+    transform: scale(0.94);
+  }
+
+  .wave-bars {
+    flex: 1;
+    height: 14px;
+    background: repeating-linear-gradient(90deg, #ffb3c6, #ffb3c6 10px, #ff4d6d 10px, #ff4d6d 20px);
+    border-radius: 20px;
+  }
+
+  .video-wrapper {
+    margin: 12px 0 5px;
+    display: flex;
+    justify-content: center;
+  }
+
+  video {
+    width: 90%;
+    max-width: 330px;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    border-radius: 38px;
+    box-shadow: 0 18px 30px rgba(0,0,0,0.6), 0 0 0 3px #ff77aa;
+  }
+
+  /* القلوب المتساقطة */
+  .falling-heart {
     position: fixed;
     top: -50px;
-    width: 25px;
-    height: 25px;
-    background: url('heart.png') center/contain no-repeat;
+    pointer-events: none;
+    z-index: 2000;
+    font-size: 28px;
+    filter: drop-shadow(0 0 5px #ff2e5e);
     animation: fall linear forwards;
-    opacity: 0.9;
-}
+  }
 
-@keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(110vh) rotate(360deg); }
-}
+  @keyframes fall {
+    0% {
+      transform: translateY(-20px) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
 
-/* الكارد */
-.container {
-    background: rgba(0,0,0,0.5);
-    margin: 20px;
-    border-radius: 30px;
-    padding: 20px;
-    backdrop-filter: blur(12px);
-}
-
-/* الصورة قلب ❤️ */
-.main-img {
-    width: 100%;
-    max-width: 350px;
-    margin: auto;
-    display: block;
-    filter: drop-shadow(0 0 20px #ff4d94);
-
-    /* شكل قلب */
-    clip-path: path("M 150 270 C 20 150, 20 0, 150 100 C 280 0, 280 150, 150 270 Z");
-}
-
-/* النص */
-#typedText {
+  .footer-note {
+    font-size: 12px;
     margin-top: 20px;
-    font-size: 18px;
-    line-height: 1.8;
-}
+    opacity: 0.7;
+    color: #ffbfd5;
+  }
 
-/* العداد */
-.counter {
-    margin-top: 15px;
-    font-size: 20px;
-    color: #ff99cc;
-    border-top: 1px solid #ff66b2;
-    padding-top: 10px;
-}
-
-/* الريكورد */
-.voice-box {
-    margin-top: 20px;
-    background: linear-gradient(45deg, #ff4d94, #ff99cc);
-    border-radius: 40px;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.play-btn {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: white;
-    color: #ff4d94;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-/* الفيديو */
-.video-box {
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-}
-
-video {
-    width: 90%;
-    max-width: 350px;
-    aspect-ratio: 9/16;
-    object-fit: cover;
-    border-radius: 25px;
-}
+  @media (max-width: 500px) {
+    #typedText { font-size: 1.2rem; }
+    .play-circle { width: 48px; height: 48px; font-size: 24px; }
+  }
 </style>
 </head>
-
 <body>
 
+<!-- شاشة البداية (بالصورة فقط) -->
 <div id="startScreen">
-    <button id="startBtn">اضغط هنا ❤️</button>
+  <img src="image.jpg" id="startImg" alt="صورتي" onerror="this.src='https://placehold.co/200x200/ff3388/white?text=💖'">
+  <button id="startBtn">✨ اضغط هنا ✨</button>
 </div>
 
-<audio id="bgMusic" src="vice1.mp3" loop></audio>
-<audio id="voice" src="vice2.mp3"></audio>
+<!-- الملفات الصوتية -->
+<audio id="bgMusic" src="vice1.mp3" loop preload="auto"></audio>
+<audio id="voiceMsg" src="vice2.mp3" preload="auto"></audio>
 
-<div class="container">
+<div class="glass-container">
+  <!-- الصورة الرئيسية image.jpg -->
+  <img src="image.jpg" class="main-img" alt="حب" onerror="this.src='https://placehold.co/400x400/ff3388/white?text=💖'">
 
-<img src="image.jpg" class="main-img">
+  <div class="message-area">
+    <div id="typedText"></div>
+  </div>
 
-<div id="typedText"></div>
+  <div class="counter-love" id="loveCounter">💞 0 يوم | 0 ساعة | 0 دقيقة | 0 ثانية</div>
 
-<div class="counter" id="counter"></div>
+  <!-- ريكورد صوتي -->
+  <div class="voice-card">
+    <div class="play-circle" id="voicePlayBtn">🎤</div>
+    <div class="wave-bars"></div>
+    <div style="font-size: 14px; color:#ffc0e0;">♥ رسالة صوتية ♥</div>
+  </div>
 
-<div class="voice-box">
-    <div class="play-btn" onclick="playVoice()">▶</div>
-</div>
-
-<div class="video-box">
-<video controls>
-    <source src="video1.mp4">
-</video>
-</div>
-
+  <!-- فيديو تيك توك -->
+  <div class="video-wrapper">
+    <video controls playsinline preload="metadata">
+      <source src="https://b7xha.github.io/mohamed/video1.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="footer-note">🌹 كل لحظة معاكِ أغلى من أي حاجة 🌹</div>
 </div>
 
 <script>
+  (function() {
+    const startScreen = document.getElementById('startScreen');
+    const startBtn = document.getElementById('startBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const voiceAudio = document.getElementById('voiceMsg');
+    const voicePlayBtn = document.getElementById('voicePlayBtn');
+    const typedDiv = document.getElementById('typedText');
+    const counterDiv = document.getElementById('loveCounter');
 
-// تشغيل
-document.getElementById("startBtn").onclick = () => {
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("bgMusic").play();
-    createHearts();
-    typeText();
-    startCounter();
-}
+    const loveMessage = `💗 كل لحظة معاكِ أغلى من أي حاجة ❤️\nأنتِ مصدر سعادتي ودنياي 💖`;
+    let charIndex = 0;
+    let typingInterval = null;
 
-// كتابة
-let text = `كل يوم معاكي هو أجمل حاجة في حياتي ❤️`;
-
-let i = 0;
-function typeText() {
-    if (i < text.length) {
-        document.getElementById("typedText").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeText, 50);
+    function startTypingEffect() {
+      typedDiv.innerHTML = '';
+      charIndex = 0;
+      if (typingInterval) clearTimeout(typingInterval);
+      function typeNextChar() {
+        if (charIndex < loveMessage.length) {
+          let currentChar = loveMessage.charAt(charIndex);
+          if (currentChar === '\n') {
+            typedDiv.innerHTML += '<br>';
+          } else {
+            typedDiv.innerHTML += currentChar;
+          }
+          charIndex++;
+          typingInterval = setTimeout(typeNextChar, 45);
+        } else {
+          clearTimeout(typingInterval);
+        }
+      }
+      typeNextChar();
     }
-}
 
-// عداد
-function startCounter() {
-    let startDate = new Date("2025-06-02");
+    function initCounterAndUpdate() {
+      const startDate = new Date(2025, 5, 2);
+      function updateCounter() {
+        const now = new Date();
+        const diffMs = now - startDate;
+        if (diffMs < 0) {
+          counterDiv.innerHTML = `💖 في انتظار 2 يونيو 2025 💖`;
+          return;
+        }
+        const totalSeconds = Math.floor(diffMs / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        counterDiv.innerHTML = `💖 ${days} يوم | ${hours} ساعة | ${minutes} دقيقة | ${seconds} ثانية 💖`;
+      }
+      updateCounter();
+      setInterval(updateCounter, 1000);
+    }
 
+    let heartsInterval = null;
+    function startFallingHearts() {
+      if (heartsInterval) clearInterval(heartsInterval);
+      heartsInterval = setInterval(() => {
+        createHeart();
+      }, 150);
+    }
+
+    function createHeart() {
+      const heartDiv = document.createElement('div');
+      heartDiv.classList.add('falling-heart');
+      const heartSymbols = ['❤️', '💖', '💗', '💓', '💕', '💞', '💘', '💝', '❤️‍🔥'];
+      const randomHeart = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      heartDiv.innerHTML = randomHeart;
+      const size = Math.floor(Math.random() * 30) + 24;
+      heartDiv.style.fontSize = size + 'px';
+      heartDiv.style.left = Math.random() * 100 + '%';
+      const duration = (Math.random() * 3.5 + 2.2).toFixed(2);
+      heartDiv.style.animationDuration = duration + 's';
+      heartDiv.style.animation = `fall ${duration}s linear forwards`;
+      document.body.appendChild(heartDiv);
+      heartDiv.addEventListener('animationend', () => {
+        if (heartDiv && heartDiv.remove) heartDiv.remove();
+      });
+      setTimeout(() => {
+        if (heartDiv && heartDiv.remove) heartDiv.remove();
+      }, duration * 1000 + 500);
+    }
+
+    function playVoiceRecording() {
+      if (!voiceAudio) return;
+      const bg = bgMusic;
+      let wasPlaying = false;
+      if (!bg.paused) {
+        wasPlaying = true;
+        bg.volume = 0.2;
+      }
+      voiceAudio.currentTime = 0;
+      voiceAudio.play().catch(err => console.warn("الصوت:", err));
+      voiceAudio.onended = () => {
+        if (wasPlaying) bg.volume = 1.0;
+        voiceAudio.onended = null;
+      };
+    }
+
+    voicePlayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playVoiceRecording();
+    });
+
+    let isStarted = false;
+    function startFullExperience() {
+      if (isStarted) return;
+      isStarted = true;
+
+      startScreen.style.opacity = '0';
+      setTimeout(() => {
+        startScreen.style.display = 'none';
+      }, 400);
+
+      bgMusic.volume = 0.85;
+      bgMusic.play().catch(e => console.log("موسيقى:", e));
+
+      startTypingEffect();
+      initCounterAndUpdate();
+      startFallingHearts();  // ✅ القلوب تنزل من هنا
+    }
+
+    startBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      startFullExperience();
+    });
+
+    // ضمان استمرار القلوب
     setInterval(() => {
-        let now = new Date();
-        let diff = now - startDate;
-
-        let d = Math.floor(diff / (1000*60*60*24));
-        let h = Math.floor((diff / (1000*60*60)) % 24);
-        let m = Math.floor((diff / (1000*60)) % 60);
-        let s = Math.floor((diff / 1000) % 60);
-
-        document.getElementById("counter").innerHTML =
-        `💖 ${d} يوم | ${h} ساعة | ${m} دقيقة | ${s} ثانية`;
-    }, 1000);
-}
-
-// قلوب
-function createHearts() {
-    setInterval(() => {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random()*3+3)+"s";
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),6000);
-    },150);
-}
-
-// ريكورد
-function playVoice(){
-    let bg=document.getElementById("bgMusic");
-    let voice=document.getElementById("voice");
-
-    bg.volume=0.2;
-    voice.play();
-
-    voice.onended=()=>{bg.volume=1;}
-}
-
+      if (isStarted && !heartsInterval) {
+        startFallingHearts();
+      }
+    }, 5000);
+  })();
 </script>
-
 </body>
-</html>
+        </html>
