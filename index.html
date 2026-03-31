@@ -1,8 +1,12 @@
-here<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- خط عربي -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
 <title>💖</title>
 
 <style>
@@ -12,6 +16,7 @@ body {
     color: white;
     text-align: center;
     background: linear-gradient(135deg, #1a001f, #330033, #660033);
+    overflow-x: hidden;
 }
 
 /* البداية */
@@ -39,18 +44,19 @@ body {
 .heart {
     position: fixed;
     top: -50px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     background: url('heart.png') center/contain no-repeat;
     animation: fall linear forwards;
+    opacity: 0.9;
 }
 
 @keyframes fall {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(80px) translateY(110vh); }
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
 }
 
-/* الكارت */
+/* الكارد */
 .container {
     background: rgba(0,0,0,0.5);
     margin: 20px;
@@ -59,12 +65,16 @@ body {
     backdrop-filter: blur(12px);
 }
 
-/* الصورة */
+/* الصورة قلب ❤️ */
 .main-img {
     width: 100%;
-    max-width: 400px;
-    border-radius: 40px;
-    box-shadow: 0 0 30px #ff66b2;
+    max-width: 350px;
+    margin: auto;
+    display: block;
+    filter: drop-shadow(0 0 20px #ff4d94);
+
+    /* شكل قلب */
+    clip-path: path("M 150 270 C 20 150, 20 0, 150 100 C 280 0, 280 150, 150 270 Z");
 }
 
 /* النص */
@@ -104,23 +114,9 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-weight: bold;
 }
 
-.wave {
-    flex: 1;
-    height: 6px;
-    border-radius: 10px;
-    background: repeating-linear-gradient(
-        90deg,
-        white,
-        white 5px,
-        #ff4d94 5px,
-        #ff4d94 10px
-    );
-}
-
-/* الفيديو تيك توك */
+/* الفيديو */
 .video-box {
     margin-top: 25px;
     display: flex;
@@ -133,7 +129,6 @@ video {
     aspect-ratio: 9/16;
     object-fit: cover;
     border-radius: 25px;
-    box-shadow: 0 0 25px #ff4d94;
 }
 </style>
 </head>
@@ -157,7 +152,6 @@ video {
 
 <div class="voice-box">
     <div class="play-btn" onclick="playVoice()">▶</div>
-    <div class="wave"></div>
 </div>
 
 <div class="video-box">
@@ -180,20 +174,18 @@ document.getElementById("startBtn").onclick = () => {
 }
 
 // كتابة
-let text = `احنا متكلمين من يوم 2/6/2025 ❤️
-وبعد بكره هنكمل عشر شهور 💕
-كل يوم معاكي بيعدي كأنه أجمل حاجة في حياتي 💖`;
+let text = `كل يوم معاكي هو أجمل حاجة في حياتي ❤️`;
 
 let i = 0;
 function typeText() {
     if (i < text.length) {
         document.getElementById("typedText").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeText, 40);
+        setTimeout(typeText, 50);
     }
 }
 
-// عداد بالثواني
+// عداد
 function startCounter() {
     let startDate = new Date("2025-06-02");
 
@@ -201,13 +193,13 @@ function startCounter() {
         let now = new Date();
         let diff = now - startDate;
 
-        let days = Math.floor(diff / (1000*60*60*24));
-        let hours = Math.floor((diff / (1000*60*60)) % 24);
-        let minutes = Math.floor((diff / (1000*60)) % 60);
-        let seconds = Math.floor((diff / 1000) % 60);
+        let d = Math.floor(diff / (1000*60*60*24));
+        let h = Math.floor((diff / (1000*60*60)) % 24);
+        let m = Math.floor((diff / (1000*60)) % 60);
+        let s = Math.floor((diff / 1000) % 60);
 
         document.getElementById("counter").innerHTML =
-        `💖 ${days} يوم | ${hours} ساعة | ${minutes} دقيقة | ${seconds} ثانية`;
+        `💖 ${d} يوم | ${h} ساعة | ${m} دقيقة | ${s} ثانية`;
     }, 1000);
 }
 
@@ -220,21 +212,8 @@ function createHearts() {
         heart.style.animationDuration = (Math.random()*3+3)+"s";
         document.body.appendChild(heart);
         setTimeout(()=>heart.remove(),6000);
-    },200);
+    },150);
 }
-
-// ضغط
-document.addEventListener("click", e => {
-    for(let i=0;i<4;i++){
-        let heart = document.createElement("div");
-        heart.className="heart";
-        heart.style.left=e.clientX+"px";
-        heart.style.top=e.clientY+"px";
-        heart.style.animationDuration="2s";
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),2000);
-    }
-});
 
 // ريكورد
 function playVoice(){
@@ -250,4 +229,4 @@ function playVoice(){
 </script>
 
 </body>
-  </html>
+</html>
