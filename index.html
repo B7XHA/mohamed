@@ -56,7 +56,10 @@
     color: white;
     cursor: pointer;
     box-shadow: 0 0 30px #ff4080;
+    transition: transform 0.2s;
   }
+
+  #startBtn:hover { transform: scale(1.02); }
 
   .glass-container {
     max-width: 550px;
@@ -125,7 +128,10 @@
     font-size: 28px;
     color: white;
     box-shadow: 0 0 12px #ff4d6d;
+    transition: transform 0.1s;
   }
+
+  .play-circle:active { transform: scale(0.94); }
 
   .wave-bars {
     flex: 1;
@@ -183,9 +189,9 @@
   <source src="https://voca.ro/11k2ojVcKXcz/embed" type="audio/mpeg">
 </audio>
 
-<!-- رسالة صوتية (ريكورد) من Vocaroo -->
+<!-- رسالة صوتية (ريكورد) من Vocaroo - الرابط الصحيح -->
 <audio id="voiceMsg" preload="auto">
-  <source src="https://voca.ro/1cB0cZIuo82o/embed" type="audio/mpeg">
+  <source src="https://vocaroo.com/embed/1cB0cZIuo82o?autoplay=0" type="audio/mpeg">
 </audio>
 
 <div class="glass-container">
@@ -298,7 +304,6 @@
         voiceAudio.currentTime = 0;
         voiceAudio.play().catch(err => {
             console.log("الصوت:", err);
-            // لو فشل التشغيل، نرجع الصوت الخلفي طبيعي
             if (wasPlaying) bg.volume = 1.0;
         });
         voiceAudio.onended = () => {
